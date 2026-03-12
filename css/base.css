@@ -3,7 +3,8 @@
    ========================= */
 
 :root {
-  --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font:
+    "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
   /* Accent (vert propre, proche de ton CV) */
   --accent: #4caf50;
@@ -62,7 +63,8 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--text);
-  background: radial-gradient(
+  background:
+    radial-gradient(
       1200px 600px at 75% 10%,
       rgba(76, 175, 80, 0.1),
       transparent 55%
@@ -289,7 +291,10 @@ body[data-theme="dark"] .nav a:hover {
   font-weight: 650;
   letter-spacing: -0.01em;
   box-shadow: var(--shadow-soft);
-  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background 120ms ease;
 }
 .btn:hover {
   transform: translateY(-1px);
@@ -427,7 +432,8 @@ body[data-theme="dark"] .nav a:hover {
   height: 280px;
   border-radius: calc(var(--radius) - 8px);
   overflow: hidden;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       700px 320px at 30% 10%,
       rgba(76, 175, 80, 0.18),
       transparent 55%
@@ -444,19 +450,24 @@ body[data-theme="dark"] .nav a:hover {
 .grid-glow {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       to right,
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
     linear-gradient(rgba(16, 18, 20, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(16, 18, 20, 0.06) 1px, transparent 1px);
-  background-size: 100% 100%, 34px 34px, 34px 34px;
+  background-size:
+    100% 100%,
+    34px 34px,
+    34px 34px;
   opacity: 0.9;
   mix-blend-mode: multiply;
 }
 body[data-theme="dark"] .grid-glow {
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       to right,
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0) 100%
@@ -881,7 +892,8 @@ textarea:focus {
   inset: 0;
   pointer-events: none;
 
-  background: radial-gradient(
+  background:
+    radial-gradient(
       820px 460px at 12% 26%,
       rgba(255, 255, 255, 0.92),
       transparent 62%
@@ -939,4 +951,92 @@ textarea:focus {
   overflow: hidden;
   background: #f2f3f5;
   border: 1px solid rgba(16, 18, 20, 0.08);
+}
+
+.toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-20px) scale(0.98);
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.toast-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 320px;
+  max-width: 420px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(18, 18, 18, 0.92);
+  color: #fff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.toast-text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.98rem;
+}
+
+.toast-text p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.toast-close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.toast-close:hover {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .toast {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+  }
+
+  .toast-content {
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
 }

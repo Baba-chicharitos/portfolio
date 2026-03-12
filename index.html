@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="fr">
   <head>
@@ -51,7 +51,6 @@
         </nav>
 
         <div class="header-actions">
-          <!-- Bouton thème : JS plus tard -->
           <button
             class="icon-btn"
             type="button"
@@ -97,8 +96,8 @@
 
             <p class="lead z-index-10">
               Je crée des <strong>web apps JavaScript</strong> et des
-              <strong>solution logicielles</strong> : propres,
-              responsives et orientées utilisateur.
+              <strong>solution logicielles</strong> : propres, responsives et
+              orientées utilisateur.
               <br />
               <span class="muted z-index-10">
                 >Créativité maîtrisée, rigueur, écoute et compréhension sont les
@@ -226,9 +225,7 @@
               </div>
               <div class="card-body z-index-10">
                 <h3>Bientôt : un SAS</h3>
-                <p class="muted z-index-10">
-                  Une SAS pensé pour motiver.
-                </p>
+                <p class="muted z-index-10">Une SAS pensé pour motiver.</p>
 
                 <div class="tags z-index-10">
                   <span class="tag z-index-10">Web app JS</span>
@@ -318,9 +315,10 @@
           <header class="section-head">
             <h2>À propos</h2>
             <p class="sub">
-              Autodidacte, puis étudiant, j’apprends en construisant et en itérant. Je cherche
-              une progression solide vers le monde de l'entrepeunariat, avec une trajectoire
-              long terme vers la cybersécurité.
+              Autodidacte, puis étudiant, j’apprends en construisant et en
+              itérant. Je cherche une progression solide vers le monde de
+              l'entrepeunariat, avec une trajectoire long terme vers la
+              cybersécurité.
             </p>
           </header>
 
@@ -343,9 +341,8 @@
             <div class="card about-card">
               <h3>Ce que je cherche</h3>
               <p class="muted">
-                Des missions concrètes et des
-                projets où je peux apprendre vite, livrer proprement, et
-                progresser.
+                Des missions concrètes et des projets où je peux apprendre vite,
+                livrer proprement, et progresser.
               </p>
               <div class="about-badges">
                 <span class="badge">Curieux</span>
@@ -369,7 +366,18 @@
           </header>
 
           <div class="contact-grid">
-            <form class="card form" action="#" method="post">
+            <form
+              class="card form"
+              action="https://formsubmit.co/baptiste.ser09@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="hidden"
+                name="_subject"
+                value="Nouveau message depuis le portfolio"
+              />
+              <input type="hidden" name="_template" value="table" />
               <div class="field">
                 <label for="name">Nom</label>
                 <input
@@ -449,7 +457,6 @@
               </ul>
 
               <div class="divider"></div>
-
             </aside>
           </div>
         </div>
@@ -464,5 +471,89 @@
         <a class="muted" href="#top">Retour en haut</a>
       </div>
     </footer>
+    <div class="toast" id="toast">
+      <div class="toast-content">
+        <span class="toast-icon">✓</span>
+        <div class="toast-text">
+          <strong>Message envoyé</strong>
+          <p>
+            Merci, ton message a bien été envoyé. Je te répondrai dès que
+            possible.
+          </p>
+        </div>
+        <button class="toast-close" id="toastClose" aria-label="Fermer">
+          ×
+        </button>
+      </div>
+    </div>
+    <script>
+      const form = document.getElementById("contactForm");
+      const toast = document.getElementById("toast");
+      const toastClose = document.getElementById("toastClose");
+      const formStatus = document.getElementById("formStatus");
+
+      let toastTimeout;
+
+      function showToast(message, isError = false) {
+        const title = toast.querySelector(".toast-text strong");
+        const text = toast.querySelector(".toast-text p");
+        const icon = toast.querySelector(".toast-icon");
+
+        if (isError) {
+          title.textContent = "Erreur";
+          text.textContent = message;
+          icon.textContent = "!";
+          icon.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
+        } else {
+          title.textContent = "Message envoyé";
+          text.textContent = message;
+          icon.textContent = "✓";
+          icon.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
+        }
+
+        toast.classList.add("show");
+
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove("show");
+        }, 4500);
+      }
+
+      toastClose.addEventListener("click", () => {
+        toast.classList.remove("show");
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        formStatus.textContent = "Envoi en cours...";
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (response.ok) {
+            form.reset();
+            formStatus.textContent = "";
+            showToast(
+              "Merci, ton message a bien été envoyé. Je te répondrai dès que possible.",
+            );
+          } else {
+            formStatus.textContent = "";
+            showToast("L’envoi a échoué. Réessaie dans un instant.", true);
+          }
+        } catch (error) {
+          formStatus.textContent = "";
+          showToast("Impossible d’envoyer le message pour le moment.", true);
+        }
+      });
+    </script>
   </body>
 </html>
