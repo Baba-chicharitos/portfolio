@@ -542,6 +542,22 @@ body[data-theme="dark"] .section-soft {
   background: var(--bg-soft);
 }
 
+/* Uniformise la hauteur de la zone image des cards */
+.project-card .card-media {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 8px);
+}
+
 .media-placeholder {
   height: 138px;
   border-radius: calc(var(--radius) - 8px);
